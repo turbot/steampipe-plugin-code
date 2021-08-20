@@ -20,7 +20,7 @@ func (*slackToken) Type() string {
 
 func (*slackToken) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
-		regexp.MustCompile("(?m)xox(?:a|b|p|o|s|r)-(?:\\d+-)+[a-z0-9]+"),
+		regexp.MustCompile(`(?m)xox(?:a|b|p|o|s|r)-(?:\d+-)+[a-z0-9]+`),
 	}
 }
 
@@ -31,6 +31,9 @@ func (*slackToken) Verify(secret string) (*bool, error) {
 	}
 	defer resp.Body.Close()
 	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
 	var res map[string]interface{}
 	err = json.Unmarshal(body, &res)
 	if err != nil {
