@@ -2,15 +2,6 @@ package secrets
 
 import "regexp"
 
-// import (
-// 	"encoding/base64"
-// 	"fmt"
-// 	"net/http"
-// 	"strings"
-
-// 	"github.com/turbot/go-kit/types"
-// )
-
 func init() {
 	RegisterMatcher(&googleApiKey{})
 }
