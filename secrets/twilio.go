@@ -3,22 +3,21 @@ package secrets
 import "regexp"
 
 func init() {
-	RegisterMatcher(&twilioAccessKey{})
+	RegisterMatcher(&twilioAuthToken{})
 }
 
-type twilioAccessKey struct{}
+type twilioAuthToken struct{}
 
-func (*twilioAccessKey) Type() string {
-	return "twilio_access_key"
+func (*twilioAuthToken) Type() string {
+	return "twilio_auth_token"
 }
 
-func (*twilioAccessKey) DenyList() []*regexp.Regexp {
+func (*twilioAuthToken) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
-		regexp.MustCompile(`AC[a-z0-9]{32}`), // Account SID (ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
-		regexp.MustCompile(`SK[a-z0-9]{32}`), // Auth token (SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
+		regexp.MustCompile(`(?m)SK[a-z0-9]{32}`), // Auth token (SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
 	}
 }
 
-func (*twilioAccessKey) Verify(secret string) (*bool, error) {
+func (*twilioAuthToken) Verify(secret string) (*bool, error) {
 	return nil, nil
 }

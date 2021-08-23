@@ -23,7 +23,7 @@ func (*stripeAccessKey) Type() string {
 
 func (*stripeAccessKey) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
-		regexp.MustCompile(`(?:r|s)k_live_[0-9a-zA-Z]{24}`),
+		regexp.MustCompile(`(?m)(?:r|s)k_live_[0-9a-zA-Z]{24}`),
 	}
 }
 

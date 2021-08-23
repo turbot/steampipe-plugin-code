@@ -18,7 +18,7 @@ func (*facebookAccessToken) Type() string {
 
 func (*facebookAccessToken) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
-		regexp.MustCompile(`EAACEdEose0cBA[0-9A-Za-z]+`),
+		regexp.MustCompile(`(?m)EAACEdEose0cBA[0-9A-Za-z]+`),
 	}
 }
 
@@ -35,7 +35,7 @@ func (*facebookOauth) Type() string {
 
 func (*facebookOauth) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
-		regexp.MustCompile(`[f|F][a|A][c|C][e|E][b|B][o|O][o|O][k|K].*['|\"][0-9a-f]{32}['|\"]`),
+		regexp.MustCompile(`(?m)[f|F][a|A][c|C][e|E][b|B][o|O][o|O][k|K].*['|\"][0-9a-f]{32}['|\"]`),
 	}
 }
 
@@ -52,7 +52,7 @@ func (*facebookSecretKey) Type() string {
 
 func (*facebookSecretKey) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
-		regexp.MustCompile(`(?i)(facebook|fb)(.{0,20})?(?-i)['\"][0-9a-f]{32}`),
+		regexp.MustCompile(`(?im)(facebook|fb)(.{0,20})?(?-i)['\"][0-9a-f]{32}`),
 	}
 }
 

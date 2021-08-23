@@ -20,8 +20,8 @@ func (*githubPersonalAccessToken) Type() string {
 func (*githubPersonalAccessToken) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
 		// https://github.blog/2021-04-05-behind-githubs-new-authentication-token-formats/
-		regexp.MustCompile(`(ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9_]{36}`),
-		regexp.MustCompile(`[0-9a-f]{40}`), // https://bl.ocks.org/magnetikonline/073afe7909ffdd6f10ef06a00bc3bc88
+		regexp.MustCompile(`(?m)(ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9_]{36}`),
+		regexp.MustCompile(`(?m)[0-9a-f]{40}`), // https://bl.ocks.org/magnetikonline/073afe7909ffdd6f10ef06a00bc3bc88
 	}
 }
 
@@ -39,7 +39,7 @@ func (*githubOAuthAccessToken) Type() string {
 
 func (*githubOAuthAccessToken) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
-		regexp.MustCompile(`gho_[0-9a-zA-Z]{36}`),
+		regexp.MustCompile(`(?m)gho_[0-9a-zA-Z]{36}`),
 	}
 }
 
@@ -57,7 +57,7 @@ func (*githubAppToken) Type() string {
 
 func (*githubAppToken) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
-		regexp.MustCompile(`(ghu|ghs)_[0-9a-zA-Z]{36}`),
+		regexp.MustCompile(`(?m)(ghu|ghs)_[0-9a-zA-Z]{36}`),
 	}
 }
 
@@ -75,7 +75,7 @@ func (*githubRefreshToken) Type() string {
 
 func (*githubRefreshToken) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
-		regexp.MustCompile(`ghr_[0-9a-zA-Z]{76}`),
+		regexp.MustCompile(`(?m)ghr_[0-9a-zA-Z]{76}`),
 	}
 }
 

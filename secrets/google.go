@@ -14,7 +14,7 @@ func (*googleApiKey) Type() string {
 
 func (*googleApiKey) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
-		regexp.MustCompile(`AIza[0-9A-Za-z\\-_]{35}`),
+		regexp.MustCompile(`(?m)AIza[0-9A-Za-z\\-_]{35}`),
 	}
 }
 

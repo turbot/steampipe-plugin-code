@@ -14,7 +14,7 @@ func (*oktaToken) Type() string {
 
 func (*oktaToken) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
-		regexp.MustCompile(`00[a-zA-Z0-9\-\_]{40}`), // https://devforum.okta.com/t/api-token-length/5519
+		regexp.MustCompile(`(?m)00[a-zA-Z0-9\-\_]{40}`), // https://devforum.okta.com/t/api-token-length/5519
 	}
 }
 

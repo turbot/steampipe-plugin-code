@@ -14,7 +14,7 @@ func (*twitterSecretKey) Type() string {
 
 func (*twitterSecretKey) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
-		regexp.MustCompile(`(?i)twitter(.{0,20})?['\"][0-9a-z]{35,44}`),
+		regexp.MustCompile(`(?im)twitter(.{0,20})?['\"][0-9a-z]{35,44}`),
 	}
 }
 
