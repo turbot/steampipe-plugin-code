@@ -14,7 +14,7 @@ func (*linkedinSecretKey) Type() string {
 
 func (*linkedinSecretKey) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
-		regexp.MustCompile(`(?im)[0-9a-zA-Z]{16}`),
+		regexp.MustCompile(`(?m)[0-9a-zA-Z]{16}`),
 	}
 }
 
