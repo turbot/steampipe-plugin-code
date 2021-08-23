@@ -3,25 +3,83 @@ package secrets
 import "regexp"
 
 func init() {
-	RegisterMatcher(&githubToken{})
+	RegisterMatcher(&githubPersonalAccessToken{})
+	RegisterMatcher(&githubOAuthAccessToken{})
+	RegisterMatcher(&githubAppToken{})
+	RegisterMatcher(&githubRefreshToken{})
 }
 
-type githubToken struct{}
+//// Github Personal Access Token
 
-func (*githubToken) Type() string {
-	return "github_token"
+type githubPersonalAccessToken struct{}
+
+func (*githubPersonalAccessToken) Type() string {
+	return "github_personal_access_token"
 }
 
-func (*githubToken) DenyList() []*regexp.Regexp {
+func (*githubPersonalAccessToken) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
 		// https://github.blog/2021-04-05-behind-githubs-new-authentication-token-formats/
 		regexp.MustCompile(`(ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9_]{36}`),
-		regexp.MustCompile(`(?i)github(.{0,20})?(?-i)['\"][0-9a-zA-Z]{35,40}`),
 		regexp.MustCompile(`[0-9a-f]{40}`), // https://bl.ocks.org/magnetikonline/073afe7909ffdd6f10ef06a00bc3bc88
 	}
 }
 
-func (*githubToken) Verify(secret string) (*bool, error) {
+func (*githubPersonalAccessToken) Verify(secret string) (*bool, error) {
+	return nil, nil
+}
+
+//// Github OAuth Access Token
+
+type githubOAuthAccessToken struct{}
+
+func (*githubOAuthAccessToken) Type() string {
+	return "github_oauth_access_token"
+}
+
+func (*githubOAuthAccessToken) DenyList() []*regexp.Regexp {
+	return []*regexp.Regexp{
+		regexp.MustCompile(`gho_[0-9a-zA-Z]{36}`),
+	}
+}
+
+func (*githubOAuthAccessToken) Verify(secret string) (*bool, error) {
+	return nil, nil
+}
+
+//// Github App Token
+
+type githubAppToken struct{}
+
+func (*githubAppToken) Type() string {
+	return "github_app_token"
+}
+
+func (*githubAppToken) DenyList() []*regexp.Regexp {
+	return []*regexp.Regexp{
+		regexp.MustCompile(`(ghu|ghs)_[0-9a-zA-Z]{36}`),
+	}
+}
+
+func (*githubAppToken) Verify(secret string) (*bool, error) {
+	return nil, nil
+}
+
+//// Github Refresh Token
+
+type githubRefreshToken struct{}
+
+func (*githubRefreshToken) Type() string {
+	return "github_refresh_token"
+}
+
+func (*githubRefreshToken) DenyList() []*regexp.Regexp {
+	return []*regexp.Regexp{
+		regexp.MustCompile(`ghr_[0-9a-zA-Z]{76}`),
+	}
+}
+
+func (*githubRefreshToken) Verify(secret string) (*bool, error) {
 	return nil, nil
 }
 

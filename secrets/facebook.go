@@ -8,6 +8,7 @@ func init() {
 	RegisterMatcher(&facebookSecretKey{})
 }
 
+// https://github.com/zricethezav/gitleaks/blob/6f5ad9dc0b385c872f652324188ce91da7157c7c/config/default.go
 // https://github.com/l4yton/RegHex#facebook-access-token
 type facebookAccessToken struct{}
 
