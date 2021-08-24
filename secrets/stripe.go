@@ -27,8 +27,8 @@ func (*stripeAccessKey) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*stripeAccessKey) Verify(secret string) (*bool, error) {
-	return nil, nil
+func (*stripeAccessKey) Verify(secret string) (VerifiedValue, error) {
+	return UNVERIFIED, nil
 }
 
 // func (*stripeAccessKey) Verify(secret string) (*bool, error) {

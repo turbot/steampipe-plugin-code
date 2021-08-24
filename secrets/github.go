@@ -25,8 +25,8 @@ func (*githubPersonalAccessToken) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*githubPersonalAccessToken) Verify(secret string) (*bool, error) {
-	return nil, nil
+func (*githubPersonalAccessToken) Verify(secret string) (VerifiedValue, error) {
+	return UNVERIFIED, nil
 }
 
 //// Github OAuth Access Token
@@ -43,8 +43,8 @@ func (*githubOAuthAccessToken) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*githubOAuthAccessToken) Verify(secret string) (*bool, error) {
-	return nil, nil
+func (*githubOAuthAccessToken) Verify(secret string) (VerifiedValue, error) {
+	return UNVERIFIED, nil
 }
 
 //// Github App Token
@@ -61,8 +61,8 @@ func (*githubAppToken) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*githubAppToken) Verify(secret string) (*bool, error) {
-	return nil, nil
+func (*githubAppToken) Verify(secret string) (VerifiedValue, error) {
+	return UNVERIFIED, nil
 }
 
 //// Github Refresh Token
@@ -79,8 +79,8 @@ func (*githubRefreshToken) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*githubRefreshToken) Verify(secret string) (*bool, error) {
-	return nil, nil
+func (*githubRefreshToken) Verify(secret string) (VerifiedValue, error) {
+	return UNVERIFIED, nil
 }
 
 // select * from code_secret where src = '45ab6f911111f9f376a5b52c25d22113f2b45fa1'

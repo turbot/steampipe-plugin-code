@@ -20,6 +20,6 @@ func (*mailchimpAccessKey) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*mailchimpAccessKey) Verify(secret string) (*bool, error) {
-	return nil, nil
+func (*mailchimpAccessKey) Verify(secret string) (VerifiedValue, error) {
+	return UNVERIFIED, nil
 }

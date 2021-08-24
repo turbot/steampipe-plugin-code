@@ -1,6 +1,8 @@
 package secrets
 
-import "regexp"
+import (
+	"regexp"
+)
 
 func init() {
 	RegisterMatcher(&twitterSecretKey{})
@@ -18,6 +20,8 @@ func (*twitterSecretKey) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*twitterSecretKey) Verify(secret string) (*bool, error) {
-	return nil, nil
+func (*twitterSecretKey) Verify(secret string) (VerifiedValue, error) {
+	return UNVERIFIED, nil
 }
+
+

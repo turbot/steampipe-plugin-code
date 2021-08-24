@@ -22,8 +22,8 @@ func (*facebookAccessToken) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*facebookAccessToken) Verify(secret string) (*bool, error) {
-	return nil, nil
+func (*facebookAccessToken) Verify(secret string) (VerifiedValue, error) {
+	return UNVERIFIED, nil
 }
 
 // https://github.com/l4yton/RegHex#facebook-oauth
@@ -39,8 +39,8 @@ func (*facebookOauth) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*facebookOauth) Verify(secret string) (*bool, error) {
-	return nil, nil
+func (*facebookOauth) Verify(secret string) (VerifiedValue, error) {
+	return UNVERIFIED, nil
 }
 
 // https://github.com/l4yton/RegHex#facebook-secret-key
@@ -56,6 +56,6 @@ func (*facebookSecretKey) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*facebookSecretKey) Verify(secret string) (*bool, error) {
-	return nil, nil
+func (*facebookSecretKey) Verify(secret string) (VerifiedValue, error) {
+	return UNVERIFIED, nil
 }

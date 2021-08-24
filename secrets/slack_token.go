@@ -24,7 +24,7 @@ func (*slackToken) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*slackToken) Verify(secret string) (*bool, error) {
+func (*slackToken) Verify(secret string) (VerifiedValue, error) {
 	resp, err := http.PostForm("https://slack.com/api/auth.test", url.Values{"token": {secret}})
 	if err != nil {
 		return nil, err
@@ -39,6 +39,5 @@ func (*slackToken) Verify(secret string) (*bool, error) {
 	if err != nil {
 		return nil, err
 	}
-	result := res["ok"].(bool)
-	return &result, nil
+	return VERIFIEDTRUE, nil
 }
