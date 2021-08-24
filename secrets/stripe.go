@@ -12,26 +12,26 @@ import "regexp"
 // )
 
 func init() {
-	RegisterMatcher(&stripeAccessKey{})
+	RegisterMatcher(&stripeApiKey{})
 }
 
-type stripeAccessKey struct{}
+type stripeApiKey struct{}
 
-func (*stripeAccessKey) Type() string {
-	return "stripe_access_key"
+func (*stripeApiKey) Type() string {
+	return "stripe_api_key"
 }
 
-func (*stripeAccessKey) DenyList() []*regexp.Regexp {
+func (*stripeApiKey) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
 		regexp.MustCompile(`(?m)(?:r|s)k_live_[0-9a-zA-Z]{24}`),
 	}
 }
 
-func (*stripeAccessKey) Verify(secret string) (VerifiedValue, error) {
+func (*stripeApiKey) Verify(secret string) (VerifiedValue, error) {
 	return UNVERIFIED, nil
 }
 
-// func (*stripeAccessKey) Verify(secret string) (*bool, error) {
+// func (*stripeApiKey) Verify(secret string) (*bool, error) {
 // 	verify_url := "https://slack.com/api/auth.test"
 
 // 	client := &http.Client{}

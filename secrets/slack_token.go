@@ -9,22 +9,22 @@ import (
 )
 
 func init() {
-	RegisterMatcher(&slackToken{})
+	RegisterMatcher(&slackApiToken{})
 }
 
-type slackToken struct{}
+type slackApiToken struct{}
 
-func (*slackToken) Type() string {
-	return "slack_token"
+func (*slackApiToken) Type() string {
+	return "slack_api_token"
 }
 
-func (*slackToken) DenyList() []*regexp.Regexp {
+func (*slackApiToken) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
 		regexp.MustCompile(`(?m)xox(?:a|b|p|o|s|r)-(?:\d+-)+[a-z0-9]+`),
 	}
 }
 
-func (*slackToken) Verify(secret string) (VerifiedValue, error) {
+func (*slackApiToken) Verify(secret string) (VerifiedValue, error) {
 	resp, err := http.PostForm("https://slack.com/api/auth.test", url.Values{"token": {secret}})
 	if err != nil {
 		return nil, err

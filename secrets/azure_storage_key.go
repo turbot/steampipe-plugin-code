@@ -5,22 +5,22 @@ import (
 )
 
 func init() {
-	RegisterMatcher(&azureStorageKey{})
+	RegisterMatcher(&azureStorageAccountKey{})
 }
 
-type azureStorageKey struct{}
+type azureStorageAccountKey struct{}
 
-func (*azureStorageKey) Type() string {
-	return "azure_storage_account_access_key"
+func (*azureStorageAccountKey) Type() string {
+	return "azure_storage_account_key"
 }
 
-func (*azureStorageKey) DenyList() []*regexp.Regexp {
+func (*azureStorageAccountKey) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
 		regexp.MustCompile(`AccountKey=[a-zA-Z0-9+/=]{88}`),
 		regexp.MustCompile(`[a-zA-Z0-9+/=]{88}`),
 	}
 }
 
-func (*azureStorageKey) Verify(secret string) (VerifiedValue, error) {
+func (*azureStorageAccountKey) Verify(secret string) (VerifiedValue, error) {
 	return UNVERIFIED, nil
 }
