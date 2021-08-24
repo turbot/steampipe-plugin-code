@@ -14,6 +14,7 @@ func (*twilioAuthToken) Type() string {
 
 func (*twilioAuthToken) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
+		regexp.MustCompile(`(?m)AC[a-z0-9]{32}`),
 		regexp.MustCompile(`(?m)SK[a-z0-9]{32}`),
 	}
 }
