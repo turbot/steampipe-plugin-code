@@ -24,7 +24,7 @@ func (*slackApiToken) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*slackApiToken) Verify(secret string) (VerifiedValue, error) {
+func (*slackApiToken) Verify(secret string) (VerifiedResult, error) {
 	resp, err := http.PostForm("https://slack.com/api/auth.test", url.Values{"token": {secret}})
 	if err != nil {
 		return nil, err
@@ -34,10 +34,14 @@ func (*slackApiToken) Verify(secret string) (VerifiedValue, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	var res map[string]interface{}
 	err = json.Unmarshal(body, &res)
 	if err != nil {
 		return nil, err
 	}
-	return VERIFIEDTRUE, nil
+	if res["ok"].(bool) {
+		return VERIFIED_TRUE, nil
+	}
+	return VERIFIED_FALSE, nil
 }

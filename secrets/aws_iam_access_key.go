@@ -25,6 +25,6 @@ func (*awsAccessKeyID) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*awsAccessKeyID) Verify(secret string) (VerifiedValue, error) {
+func (*awsAccessKeyID) Verify(secret string) (VerifiedResult, error) {
 	return UNVERIFIED, nil
 }

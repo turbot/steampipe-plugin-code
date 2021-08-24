@@ -12,7 +12,7 @@ type SecretMatcher interface {
 	Type() string
 	DenyList() []*regexp.Regexp
 	// True if secret works, false if it does not and nil if there is no test.
-	Verify(string) (VerifiedValue, error)
+	Verify(string) (VerifiedResult, error)
 }
 
 func RegisterMatcher(sm SecretMatcher) {
@@ -24,13 +24,13 @@ func Matchers() []SecretMatcher {
 }
 
 // VERIFIED enumerates the values for verified value for secret.
-type VerifiedValue *string
+type VerifiedResult *string
 
 var (
 	// when tested and creds do not work
-	VERIFIEDFALSE VerifiedValue = types.String("verified false")
+	VERIFIED_FALSE VerifiedResult = types.String("verified false")
 	// when tested and creds do work
-	VERIFIEDTRUE VerifiedValue = types.String("verified true")
+	VERIFIED_TRUE VerifiedResult = types.String("verified true")
 	// when not tested
-	UNVERIFIED VerifiedValue = types.String("unverified")
+	UNVERIFIED VerifiedResult = types.String("unverified")
 )

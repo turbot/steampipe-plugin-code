@@ -18,6 +18,6 @@ func (*twilioAuthToken) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*twilioAuthToken) Verify(secret string) (VerifiedValue, error) {
+func (*twilioAuthToken) Verify(secret string) (VerifiedResult, error) {
 	return UNVERIFIED, nil
 }

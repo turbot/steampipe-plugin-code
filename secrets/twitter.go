@@ -20,7 +20,7 @@ func (*twitterSecretKey) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*twitterSecretKey) Verify(secret string) (VerifiedValue, error) {
+func (*twitterSecretKey) Verify(secret string) (VerifiedResult, error) {
 	return UNVERIFIED, nil
 }
 

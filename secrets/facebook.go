@@ -22,7 +22,7 @@ func (*facebookAccessToken) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*facebookAccessToken) Verify(secret string) (VerifiedValue, error) {
+func (*facebookAccessToken) Verify(secret string) (VerifiedResult, error) {
 	return UNVERIFIED, nil
 }
 
@@ -39,7 +39,7 @@ func (*facebookOauth) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*facebookOauth) Verify(secret string) (VerifiedValue, error) {
+func (*facebookOauth) Verify(secret string) (VerifiedResult, error) {
 	return UNVERIFIED, nil
 }
 
@@ -56,6 +56,6 @@ func (*facebookSecretKey) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*facebookSecretKey) Verify(secret string) (VerifiedValue, error) {
+func (*facebookSecretKey) Verify(secret string) (VerifiedResult, error) {
 	return UNVERIFIED, nil
 }

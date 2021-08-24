@@ -25,7 +25,7 @@ func (*githubPersonalAccessToken) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*githubPersonalAccessToken) Verify(secret string) (VerifiedValue, error) {
+func (*githubPersonalAccessToken) Verify(secret string) (VerifiedResult, error) {
 	return UNVERIFIED, nil
 }
 
@@ -43,7 +43,7 @@ func (*githubOAuthAccessToken) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*githubOAuthAccessToken) Verify(secret string) (VerifiedValue, error) {
+func (*githubOAuthAccessToken) Verify(secret string) (VerifiedResult, error) {
 	return UNVERIFIED, nil
 }
 
@@ -61,7 +61,7 @@ func (*githubAppToken) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*githubAppToken) Verify(secret string) (VerifiedValue, error) {
+func (*githubAppToken) Verify(secret string) (VerifiedResult, error) {
 	return UNVERIFIED, nil
 }
 
@@ -79,7 +79,7 @@ func (*githubRefreshToken) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*githubRefreshToken) Verify(secret string) (VerifiedValue, error) {
+func (*githubRefreshToken) Verify(secret string) (VerifiedResult, error) {
 	return UNVERIFIED, nil
 }
 

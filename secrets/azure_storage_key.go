@@ -21,6 +21,6 @@ func (*azureStorageAccountKey) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*azureStorageAccountKey) Verify(secret string) (VerifiedValue, error) {
+func (*azureStorageAccountKey) Verify(secret string) (VerifiedResult, error) {
 	return UNVERIFIED, nil
 }
