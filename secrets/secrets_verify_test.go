@@ -58,6 +58,18 @@ func TestStripeVerifyFail(t *testing.T) {
 	}
 }
 
-// fmt.Println("String Output: \n", string(body))
-// fmt.Println("resp.Status: \n", resp.Status)
-// fmt.Println("resp.StatusCode: \n", resp.StatusCode)
+// go test -v -run TestMailChimpVerfifiedFalse /Users/lalitbhardwaj/Turbot/prod/steampipe-plugin-code/secrets
+func TestMailChimpVerfifiedFalse(t *testing.T) {
+	fmt.Println()
+	mailchimpAccessKey := "a11b1d1baf01fd5556666f434g9b123a-us5"
+
+	for _, sm := range Matchers() {
+		if sm.Type() == "mailchimp_access_key" {
+			result, err := sm.Verify(mailchimpAccessKey)
+			if err != nil {
+				t.Fatal(err)
+			}
+			fmt.Printf("TestMailChimp verification result: [%s]", *result)
+		}
+	}
+}

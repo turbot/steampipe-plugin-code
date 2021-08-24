@@ -2,9 +2,7 @@ package secrets
 
 import (
 	"encoding/base64"
-	"encoding/json"
 	"fmt"
-	"io"
 	"net/http"
 	"regexp"
 	"strings"
@@ -26,10 +24,6 @@ func (*stripeApiKey) DenyList() []*regexp.Regexp {
 	}
 }
 
-// func (*stripeApiKey) Verify(secret string) (VerifiedResult, error) {
-// 	return UNVERIFIED, nil
-// }
-
 func (*stripeApiKey) Verify(secret string) (VerifiedResult, error) {
 	verify_url := "https://api.stripe.com/v1/charges"
 
@@ -42,17 +36,6 @@ func (*stripeApiKey) Verify(secret string) (VerifiedResult, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return nil, err
-	}
-
-	var res map[string]interface{}
-	err = json.Unmarshal(body, &res)
-	if err != nil {
-		return nil, err
-	}
-
 	if resp.StatusCode == http.StatusOK {
 		return VERIFIED_TRUE, nil
 	}
@@ -63,5 +46,4 @@ func (*stripeApiKey) Verify(secret string) (VerifiedResult, error) {
 	}
 
 	return VERIFIED_FALSE, nil
-
 }

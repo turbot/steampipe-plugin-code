@@ -30,7 +30,7 @@ func (*mailchimpAccessKey) DenyList() []*regexp.Regexp {
 
 func (*mailchimpAccessKey) Verify(secret string) (VerifiedResult, error) {
 	datacenter_number := strings.Split(secret, "-us")
-	verify_url := fmt.Sprintf("https://us%s.api.mailchimp.com/3.0/", datacenter_number)
+	verify_url := fmt.Sprintf("https://us%s.api.mailchimp.com/3.0/", datacenter_number[len(datacenter_number)-1])
 
 	client := &http.Client{}
 	req, _ := http.NewRequest("GET", verify_url, nil)
@@ -41,6 +41,7 @@ func (*mailchimpAccessKey) Verify(secret string) (VerifiedResult, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+
 	if resp.StatusCode == http.StatusOK {
 		return VERIFIED_TRUE, nil
 	}
