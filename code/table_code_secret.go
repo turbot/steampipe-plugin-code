@@ -58,7 +58,7 @@ func listSecret(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 		customRegexList = append(customRegexList, regexp.MustCompile(pattern))
 	}
 	// Register custom patterns secret matcher
-	secrets.RegisterMatcher(&customPatterns{})
+	secrets.RegisterMatcher(&customPattern{})
 
 	for _, sm := range secrets.Matchers() {
 		for _, re := range sm.DenyList() {

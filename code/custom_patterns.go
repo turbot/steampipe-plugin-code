@@ -6,16 +6,16 @@ import (
 	"github.com/turbot/steampipe-plugin-code/secrets"
 )
 
-type customPatterns struct{}
+type customPattern struct{}
 
-func (*customPatterns) Type() string {
+func (*customPattern) Type() string {
 	return "custom_pattern"
 }
 
-func (*customPatterns) DenyList() []*regexp.Regexp {
+func (*customPattern) DenyList() []*regexp.Regexp {
 	return customRegexList
 }
 
-func (*customPatterns) Verify(secret string) (secrets.VerifiedResult, error) {
+func (*customPattern) Verify(secret string) (secrets.VerifiedResult, error) {
 	return secrets.UNVERIFIED, nil
 }

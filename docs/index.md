@@ -66,6 +66,17 @@ connection "code" {
 }
 ```
 
+#### Configuration for allowing checks for custom secret patterns
+
+- `custom_patterns`: Specify the custom regex patterns as an array of string
+
+```hcl
+connection "code_custom" {
+  plugin          = "code"
+  custom_patterns = ["test", "(?m)[0-9a-z]{32}-us[0-9]{1,2}"]
+}
+```
+
 ## Get involved
 
 - Open source: https://github.com/turbot/steampipe-plugin-code
