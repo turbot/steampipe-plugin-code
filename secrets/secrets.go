@@ -11,7 +11,7 @@ var matcherList []SecretMatcher
 type SecretMatcher interface {
 	Type() string
 	DenyList() []*regexp.Regexp
-	// True if secret works, false if it does not and nil if there is no test.
+	// VERIFIED_TRUE if secret works, VERIFIED_FALSE if it does not and UNVERIFIED if there is no test.
 	Verify(string) (VerifiedResult, error)
 }
 
