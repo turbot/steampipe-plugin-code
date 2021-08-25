@@ -54,7 +54,7 @@ where
     '* Basic auth: https://joe:passwd123@example.com/secret'
 ```
 
-### Deteect secrets in instance user_data
+### Detect secrets in instance user_data
 
 ```sql
 select
@@ -71,7 +71,7 @@ where
   src = user_data;
 ```
 
-### Deteect secrets in cloudformation stack template
+### Detect secrets in cloudformation stack template
 
 ```sql
 select
