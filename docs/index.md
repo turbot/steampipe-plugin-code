@@ -22,20 +22,31 @@ List instances in your Code account:
 select
   secret_type,
   secret,
+  verified,
   line,
   col
 from
   code_secret
 where
-  src = 'Detect AWS access key AKIA4YFAKEKEYXTDS252!'
+  src =
+    'Mixed secrets are matched:\n'
+    '* Slack: xoxp-5228148520-5228148525-1323104836872-10674849628c43b9d4b4660f7f9a7b65\n'
+    '* AWS: AKIA4YFAKFKFYXTDS353\n'
+    '* Basic auth: https://joe:passwd123@example.com/secret'
+    '* Stripe: sk_live_tR3PYbcVNZZ796tH88S4VQ2u'
+order by
+  secret_type;
 ```
 
 ```
-+--------------------+----------------------+------+-----+
-| secret_type        | secret               | line | col |
-+--------------------+----------------------+------+-----+
-| aws_iam_access_key | AKIA4YFAKEKEYXTDS252 | 1    | 23  |
-+--------------------+----------------------+------+-----+
++-------------------+---------------------------------------------------------------------------+----------------+------+-----+
+| secret_type       | secret                                                                    | verified       | line | col |
++-------------------+---------------------------------------------------------------------------+----------------+------+-----+
+| aws_access_key_id | AKIA4YFAKFKFYXTDS353                                                      | unverified     | 1    | 120 |
+| basic_auth        | https://joe:passwd123                                                     | unverified     | 1    | 156 |
+| slack_api_token   | xoxp-5228148520-5228148525-1323104836872-10674849628c43b9d4b4660f7f9a7b65 | verified false | 1    | 38  |
+| stripe_api_key    | sk_live_tR3PYbcVNZZ796tH88S4VQ2u                                          | verified false | 1    | 206 |
++-------------------+---------------------------------------------------------------------------+----------------+------+-----+
 ```
 
 ## Documentation
