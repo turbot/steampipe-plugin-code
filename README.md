@@ -23,12 +23,18 @@ Run a query:
 select
   secret_type,
   secret,
+  verified,
   line,
   col
 from
   code_secret
 where
-  src = 'Detect AWS access key AKIA4YFAKEKEYXTDS252!'
+  src =
+    'Mixed secrets are matched:\n'
+    '* Slack: xoxp-5228148520-5228148525-1323104836872-10674849628c43b9d4b4660f7f9a7b65\n'
+    '* AWS: AKIA4YFAKFKFYXTDS353\n'
+    '* Basic auth: https://joe:passwd123@example.com/secret'
+    '* Stripe: sk_live_tR3PYbcVNZZ796tH88S4VQ2u';
 ```
 
 ## Developing
@@ -70,13 +76,11 @@ Further reading:
 - [Writing plugins](https://steampipe.io/docs/develop/writing-plugins)
 - [Writing your first table](https://steampipe.io/docs/develop/writing-your-first-table)
 
-
 ## Credits
 
-* The `code_secret` table is based on [Yelp's detect secrets](https://github.com/Yelp/detect-secrets)
+- The `code_secret` table is based on [Yelp's detect secrets](https://github.com/Yelp/detect-secrets)
   project. The general matching approach and regular expressions are copied and
   based on their amazing work.
-
 
 ## Contributing
 
