@@ -69,11 +69,15 @@ No credentials are required.
 
 ### Configuration
 
-Installing the latest code plugin will create a config file (`~/.steampipe/config/code.spc`) with a single connection named `code`:
+Installing the latest code plugin will create a config file (`~/.steampipe/config/code.spc`) with a single connection named `code`.
+By default, code plugin allows to check for a set of patterns already defined and handled in code. You can also define custom patterns for secret scanning by using 'custom_patterns' argument in your connection config.
 
 ```hcl
 connection "code" {
   plugin = "code"
+
+  # Allows user to check for a list of custom patterns to check.
+  # custom_patterns = ["test", "(?m)[0-9a-z]{32}-us[0-9]{1,2}"]
 }
 ```
 
@@ -82,7 +86,7 @@ connection "code" {
 - `custom_patterns`: Specify the custom regex patterns as an array of string
 
 ```hcl
-connection "code_custom" {
+connection "code_custom_patterns" {
   plugin          = "code"
   custom_patterns = ["test", "(?m)[0-9a-z]{32}-us[0-9]{1,2}"]
 }
