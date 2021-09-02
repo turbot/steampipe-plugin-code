@@ -79,26 +79,26 @@ connection "code" {
 
 ### Code plugin currently scans for the following secrets:
 
-| Secrets                      |
-| :--------------------------- |
-| AWS access key id            |
-| Azure storage account key    |
-| Basic auth                   |
-| Facebook access token        |
-| Facebook oauth               |
-| Facebook secret key          |
-| Github app token             |
-| Github oauth access token    |
-| Github personal access token |
-| Github refresh token         |
-| Google api key               |
-| JWT                          |
-| Mailchimp access key         |
-| Okta token                   |
-| Slack api token              |
-| Stripe api key               |
-| Twilio auth token            |
-| Twitter secret key           |
+| Secrets                      | Secret slug                  |
+| :--------------------------- | :--------------------------- |
+| AWS access key id            | aws_access_key_id            |
+| Azure storage account key    | azure_storage_account_key    |
+| Basic auth                   | basic_auth                   |
+| Facebook access token        | facebook_access_token        |
+| Facebook oauth               | facebook_oauth               |
+| Facebook secret key          | facebook_secret_key          |
+| Github app token             | github_app_token             |
+| Github oauth access token    | github_oauth_access_token    |
+| Github personal access token | github_personal_access_token |
+| Github refresh token         | github_refresh_token         |
+| Google api key               | google_api_key               |
+| JWT                          | jwt                          |
+| Mailchimp access key         | mailchimp_access_key         |
+| Okta token                   | okta_token                   |
+| Slack api token              | slack_api_token              |
+| Stripe api key               | stripe_api_key               |
+| Twilio auth token            | twilio_auth_token            |
+| Twitter secret key           | twitter_secret_key           |
 
 ## Get involved
 
