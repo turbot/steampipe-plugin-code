@@ -23,5 +23,3 @@ func (*twitterSecretKey) DenyList() []*regexp.Regexp {
 func (*twitterSecretKey) Verify(secret string) (VerifiedResult, error) {
 	return UNVERIFIED, nil
 }
-
-
