@@ -51,7 +51,6 @@ func listSecret(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 
 	for _, sm := range secrets.Matchers() {
 		for _, re := range sm.DenyList() {
-			plugin.Logger(ctx).Error("|listSecret|", sm.Type(), "|"+re.String()+"|")
 			matchGroups := re.FindAllStringSubmatchIndex(src, -1)
 			for _, m := range matchGroups {
 				var startOffset, endOffset int
