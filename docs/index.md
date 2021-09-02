@@ -70,27 +70,38 @@ No credentials are required.
 ### Configuration
 
 Installing the latest code plugin will create a config file (`~/.steampipe/config/code.spc`) with a single connection named `code`.
-By default, code plugin allows to check for a set of patterns already defined and handled in code. You can also define custom patterns for secret scanning by using 'custom_patterns' argument in your connection config.
 
 ```hcl
 connection "code" {
   plugin = "code"
-
-  # You may specify list of custom patterns for scanning secrets.
-  # custom_patterns = ["test", "(?m)[0-9a-z]{32}-us[0-9]{1,2}"]
 }
 ```
 
-#### Configuration for allowing checks for custom secret patterns
+### Code plugin currently scans for the following secrets:
 
-- `custom_patterns`: Specify the custom regex patterns as an array of string
 
-```hcl
-connection "code_custom_patterns" {
-  plugin          = "code"
-  custom_patterns = ["test", "(?m)[0-9a-z]{32}-us[0-9]{1,2}"]
-}
-```
+
+| Secret                    | Regex                  |
+| :------------------------ | :--------------------- |
+| AWS access key id|`(?m)AKIA[0-9A-Z]{16}`|
+| Azure storage account key|`[a-zA-Z0-9+/=]{88}`|
+| Basic auth|`(?m)([a-zA-Z0-9+-\.]+://[^:/\?#\[\]@!\$&\\'\(\)\*\+,;=\s]+:[^:/\?#\[\]@!\$&\\'\(\)\*\+,;=\s]+)@`|
+| Facebook access token|`(?m)EAACEdEose0cBA[0-9A-Za-z]+`|
+| Facebook oauth|`(?im)[f|F][a|A][c|C][e|E][b|B][o|O][o|O][k|K].*['|\"][0-9a-f]{32}['|\"]`|
+| Facebook secret key|`(?im)(facebook|fb)(.{0,20})?(?-i)['\"][0-9a-f]{32}`|
+| Github app token|`(?m)(ghu|ghs)_[0-9a-zA-Z]{36}`|
+| Github oauth access token|`(?m)gho_[0-9a-zA-Z]{36}`|
+| Github personal access token|`(?m)(ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9_]{36}` or `(?m)[0-9a-f]{40}`|
+| Github refresh token|`(?m)ghr_[0-9a-zA-Z]{76}`|
+| Google api key|`(?m)AIza[0-9A-Za-z\\-_]{35}`|
+| JWT|`(?m)eyJ[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*`|
+| Mailchimp access key|`(?m)[0-9a-z]{32}-us[0-9]{1,2}`|
+| Okta token|`(?m)00[a-zA-Z0-9\-\_]{40}`|
+| Slack api token|`(?m)xox(?:a|b|p|o|s|r)-(?:\d+-)+[a-z0-9]+`|
+| Stripe api key|`(?m)(?:r|s)k_live_[0-9a-zA-Z]{24}`|
+| Twilio auth token|`(?m)AC[a-z0-9]{32}` or `(?m)SK[a-z0-9]{32}`|
+| Twitter secret key|`(?im)twitter(.{0,20})?['\"][0-9a-z]{35,44}`|
+
 
 ## Get involved
 

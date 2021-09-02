@@ -2,7 +2,6 @@ package code
 
 import (
 	"context"
-	"regexp"
 	"strings"
 
 	"github.com/turbot/steampipe-plugin-code/secrets"
@@ -46,22 +45,13 @@ type secretMatch struct {
 	Verified    *bool                 `json:"verified"`
 }
 
-var customRegexList []*regexp.Regexp
-
 func listSecret(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	quals := d.KeyColumnQuals
 	src := quals["src"].GetStringValue()
 
-	// Get list of the custom regex patterns from connection config
-	config := GetConfig(d.Connection)
-	for _, pattern := range config.CustomPatterns {
-		customRegexList = append(customRegexList, regexp.MustCompile(pattern))
-	}
-	// Register custom patterns secret matcher
-	secrets.RegisterMatcher(&customPattern{})
-
 	for _, sm := range secrets.Matchers() {
 		for _, re := range sm.DenyList() {
+			plugin.Logger(ctx).Error("|listSecret|", sm.Type(), "|"+re.String()+"|")
 			matchGroups := re.FindAllStringSubmatchIndex(src, -1)
 			for _, m := range matchGroups {
 				var startOffset, endOffset int
