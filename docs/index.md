@@ -79,29 +79,26 @@ connection "code" {
 
 ### Code plugin currently scans for the following secrets:
 
-
-
-| Secret                    | Regex                  |
-| :------------------------ | :--------------------- |
-| AWS access key id|`(?m)AKIA[0-9A-Z]{16}`|
-| Azure storage account key|`[a-zA-Z0-9+/=]{88}`|
-| Basic auth|`(?m)([a-zA-Z0-9+-\.]+://[^:/\?#\[\]@!\$&\\'\(\)\*\+,;=\s]+:[^:/\?#\[\]@!\$&\\'\(\)\*\+,;=\s]+)@`|
-| Facebook access token|`(?m)EAACEdEose0cBA[0-9A-Za-z]+`|
-| Facebook oauth|`(?im)[f|F][a|A][c|C][e|E][b|B][o|O][o|O][k|K].*['|\"][0-9a-f]{32}['|\"]`|
-| Facebook secret key|`(?im)(facebook|fb)(.{0,20})?(?-i)['\"][0-9a-f]{32}`|
-| Github app token|`(?m)(ghu|ghs)_[0-9a-zA-Z]{36}`|
-| Github oauth access token|`(?m)gho_[0-9a-zA-Z]{36}`|
-| Github personal access token|`(?m)(ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9_]{36}` or `(?m)[0-9a-f]{40}`|
-| Github refresh token|`(?m)ghr_[0-9a-zA-Z]{76}`|
-| Google api key|`(?m)AIza[0-9A-Za-z\\-_]{35}`|
-| JWT|`(?m)eyJ[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*`|
-| Mailchimp access key|`(?m)[0-9a-z]{32}-us[0-9]{1,2}`|
-| Okta token|`(?m)00[a-zA-Z0-9\-\_]{40}`|
-| Slack api token|`(?m)xox(?:a|b|p|o|s|r)-(?:\d+-)+[a-z0-9]+`|
-| Stripe api key|`(?m)(?:r|s)k_live_[0-9a-zA-Z]{24}`|
-| Twilio auth token|`(?m)AC[a-z0-9]{32}` or `(?m)SK[a-z0-9]{32}`|
-| Twitter secret key|`(?im)twitter(.{0,20})?['\"][0-9a-z]{35,44}`|
-
+| Secrets                      |
+| :--------------------------- |
+| AWS access key id            |
+| Azure storage account key    |
+| Basic auth                   |
+| Facebook access token        |
+| Facebook oauth               |
+| Facebook secret key          |
+| Github app token             |
+| Github oauth access token    |
+| Github personal access token |
+| Github refresh token         |
+| Google api key               |
+| JWT                          |
+| Mailchimp access key         |
+| Okta token                   |
+| Slack api token              |
+| Stripe api key               |
+| Twilio auth token            |
+| Twitter secret key           |
 
 ## Get involved
 
