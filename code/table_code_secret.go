@@ -27,7 +27,7 @@ func tableCodeSecret(ctx context.Context) *plugin.Table {
 			{Name: "end_offset", Type: proto.ColumnType_INT, Description: "Offset of the last character of the secret string."},
 			{Name: "line", Type: proto.ColumnType_INT, Description: "Line number of the first character of the secret string."},
 			{Name: "col", Type: proto.ColumnType_INT, Description: "Column on the line of the first character of the secret string."},
-			{Name: "verified", Type: proto.ColumnType_BOOL, Hydrate: getVerified, Transform: transform.FromValue(), Description: "True if the secret has been verified as active."},
+			{Name: "verified", Type: proto.ColumnType_STRING, Hydrate: getVerified, Transform: transform.FromValue(), Description: "Verification status of the secret. Valid values are \"verified true\", \"verified false\" and \"unverified\"."},
 			// Other columns
 			{Name: "src", Type: proto.ColumnType_STRING, Transform: transform.FromQual("src"), Description: "The source code to scan."},
 		},
@@ -48,6 +48,7 @@ type secretMatch struct {
 func listSecret(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	quals := d.KeyColumnQuals
 	src := quals["src"].GetStringValue()
+
 	for _, sm := range secrets.Matchers() {
 		for _, re := range sm.DenyList() {
 			matchGroups := re.FindAllStringSubmatchIndex(src, -1)
