@@ -79,26 +79,26 @@ connection "code" {
 
 ### Code plugin currently scans for the following secrets:
 
-| Secret                       | Slug                         |
-| :--------------------------- | :--------------------------- |
-| AWS access key ID            | aws_access_key_id            |
-| Azure storage account key    | azure_storage_account_key    |
-| Basic auth                   | basic_auth                   |
-| Facebook OAuth               | facebook_oauth               |
-| Facebook access token        | facebook_access_token        |
-| Facebook secret key          | facebook_secret_key          |
-| GitHub OAuth access token    | github_oauth_access_token    |
-| GitHub app token             | github_app_token             |
-| GitHub personal access token | github_personal_access_token |
-| GitHub refresh token         | github_refresh_token         |
-| Google API key               | google_api_key               |
-| JWT                          | jwt                          |
-| Mailchimp access key         | mailchimp_access_key         |
-| Okta token                   | okta_token                   |
-| Slack API token              | slack_api_token              |
-| Stripe API key               | stripe_api_key               |
-| Twilio auth token            | twilio_auth_token            |
-| Twitter secret key           | twitter_secret_key           |
+| Secret                       | Slug                         | Verification |
+| :--------------------------- | :--------------------------- | :----------- |
+| AWS access key ID            | aws_access_key_id            | Available    |
+| Azure storage account key    | azure_storage_account_key    | N/A          |
+| Basic auth                   | basic_auth                   | N/A          |
+| Facebook OAuth               | facebook_oauth               | N/A          |
+| Facebook access token        | facebook_access_token        | N/A          |
+| Facebook secret key          | facebook_secret_key          | N/A          |
+| GitHub OAuth access token    | github_oauth_access_token    | N/A          |
+| GitHub app token             | github_app_token             | N/A          |
+| GitHub personal access token | github_personal_access_token | N/A          |
+| GitHub refresh token         | github_refresh_token         | N/A          |
+| Google API key               | google_api_key               | N/A          |
+| JWT                          | jwt                          | N/A          |
+| Mailchimp access key         | mailchimp_access_key         | Available    |
+| Okta token                   | okta_token                   | N/A          |
+| Slack API token              | slack_api_token              | Available    |
+| Stripe API key               | stripe_api_key               | Available    |
+| Twilio auth token            | twilio_auth_token            | N/A          |
+| Twitter secret key           | twitter_secret_key           | N/A          |
 
 ## Verification Status
 
