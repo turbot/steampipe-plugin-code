@@ -18,6 +18,6 @@ func (*googleApiKey) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*googleApiKey) Verify(secret string, src string) (VerifiedResult, error) {
-	return UNVERIFIED, nil
+func (*googleApiKey) Authenticate(secret string, src string) (AuthenticatedResult, error) {
+	return NOT_IMPLEMENTED, nil
 }

@@ -18,6 +18,6 @@ func (*oktaToken) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*oktaToken) Verify(secret string, src string) (VerifiedResult, error) {
-	return UNVERIFIED, nil
+func (*oktaToken) Authenticate(secret string, src string) (AuthenticatedResult, error) {
+	return NOT_IMPLEMENTED, nil
 }

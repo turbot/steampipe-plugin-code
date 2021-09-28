@@ -20,6 +20,6 @@ func (*linkedInSecretKey) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*linkedInSecretKey) Verify(secret string, src string) (VerifiedResult, error) {
-	return UNVERIFIED, nil
+func (*linkedInSecretKey) Authenticate(secret string, src string) (AuthenticatedResult, error) {
+	return NOT_IMPLEMENTED, nil
 }

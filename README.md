@@ -23,7 +23,7 @@ Run a query:
 select
   secret_type,
   secret,
-  verified,
+  authenticated,
   line,
   col
 from

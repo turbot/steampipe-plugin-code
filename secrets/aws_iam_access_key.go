@@ -32,10 +32,10 @@ func (*awsAccessKeyID) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*awsAccessKeyID) Verify(secret string, src string) (VerifiedResult, error) {
+func (*awsAccessKeyID) Authenticate(secret string, src string) (AuthenticatedResult, error) {
 	//  This examines the variable name to identify AWS secret tokens.
 	//  The order is important since we want to prefer finding `AKIA`-based
-	//  keys (since they can be verified), rather than the secret tokens.
+	//  keys (since they can be tested), rather than the secret tokens.
 	// re := regexp.MustCompile("(?m)aws.{0,20}?['\"]([0-9a-zA-Z/+]{40})['\"]")
 	re := regexp.MustCompile(`(?m)([0-9a-zA-Z\/+]{40})`)
 
@@ -60,7 +60,7 @@ func (*awsAccessKeyID) Verify(secret string, src string) (VerifiedResult, error)
 	}
 
 	if len(secrets) == 0 {
-		return UNVERIFIED, nil
+		return NOT_IMPLEMENTED, nil
 	}
 
 	for _, secret_key := range secrets {
@@ -86,17 +86,17 @@ func (*awsAccessKeyID) Verify(secret string, src string) (VerifiedResult, error)
 				// IncompleteSignature - When the access key is invalid
 				// InvalidClientTokenId - When access key and secret key are valid but expired
 				if helpers.StringSliceContains([]string{"SignatureDoesNotMatch", "IncompleteSignature", "InvalidClientTokenId"}, awsErr.Code()) {
-					return VERIFIED_FALSE, nil
+					return UNAUTHENTICATED, nil
 				}
 			}
 		}
 
 		if callerIdentity != nil {
 			if callerIdentity.Account != nil {
-				return VERIFIED_TRUE, nil
+				return AUTHENTICATED, nil
 			}
 		}
 	}
 
-	return UNVERIFIED, nil
+	return NOT_IMPLEMENTED, nil
 }

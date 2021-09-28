@@ -27,7 +27,7 @@ func tableCodeSecret(ctx context.Context) *plugin.Table {
 			{Name: "end_offset", Type: proto.ColumnType_INT, Description: "Offset of the last character of the secret string."},
 			{Name: "line", Type: proto.ColumnType_INT, Description: "Line number of the first character of the secret string."},
 			{Name: "col", Type: proto.ColumnType_INT, Description: "Column on the line of the first character of the secret string."},
-			{Name: "verified", Type: proto.ColumnType_STRING, Hydrate: getVerified, Transform: transform.FromValue(), Description: "Verification status of the secret. Valid values are \"verified true\", \"verified false\" and \"unverified\"."},
+			{Name: "authenticated", Type: proto.ColumnType_STRING, Hydrate: getAuthenticated, Transform: transform.FromValue(), Description: "Authentication status of the secret. Valid values are \"authenticated\", \"unauthenticated\", \"not_implemented\", and \"unknown\"."},
 			// Other columns
 			{Name: "src", Type: proto.ColumnType_STRING, Transform: transform.FromQual("src"), Description: "The source code to scan."},
 		},
@@ -35,14 +35,14 @@ func tableCodeSecret(ctx context.Context) *plugin.Table {
 }
 
 type secretMatch struct {
-	Matcher     secrets.SecretMatcher `json:"matcher"`
-	SecretType  string                `json:"secret_type"`
-	Secret      string                `json:"text"`
-	StartOffset int                   `json:"start_offset"`
-	EndOffset   int                   `json:"end_offset"`
-	Line        int                   `json:"line"`
-	Col         int                   `json:"col"`
-	Verified    *bool                 `json:"verified"`
+	Matcher       secrets.SecretMatcher `json:"matcher"`
+	SecretType    string                `json:"secret_type"`
+	Secret        string                `json:"text"`
+	StartOffset   int                   `json:"start_offset"`
+	EndOffset     int                   `json:"end_offset"`
+	Line          int                   `json:"line"`
+	Col           int                   `json:"col"`
+	Authenticated string                `json:"authenticated"`
 }
 
 func listSecret(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
@@ -84,13 +84,13 @@ func listSecret(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 	return nil, nil
 }
 
-func getVerified(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (interface{}, error) {
+func getAuthenticated(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (interface{}, error) {
 	sm := h.Item.(secretMatch)
 	quals := d.KeyColumnQuals
 	src := quals["src"].GetStringValue()
-	verified, err := sm.Matcher.Verify(sm.Secret, src)
+	authenticated, err := sm.Matcher.Authenticate(sm.Secret, src)
 	if err != nil {
 		return nil, err
 	}
-	return verified, nil
+	return authenticated, nil
 }

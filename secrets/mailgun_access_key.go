@@ -20,8 +20,8 @@ func (*mailgunAccessKey) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*mailgunAccessKey) Verify(secret string, src string) (VerifiedResult, error) {
-	return UNVERIFIED, nil
+func (*mailgunAccessKey) Authenticate(secret string, src string) (AuthenticatedResult, error) {
+	return NOT_IMPLEMENTED, nil
 }
 
 // select * from code_secret where src = 'key-3ax6xnjp29jd6fds4gc373sgvjxteol0'

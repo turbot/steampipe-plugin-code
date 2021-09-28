@@ -24,16 +24,16 @@ func (*mailchimpAccessKey) DenyList() []*regexp.Regexp {
 	}
 }
 
-// func (*mailchimpAccessKey) Verify(secret string, src string) (VerifiedResult, error) {
-// 	return UNVERIFIED, nil
+// func (*mailchimpAccessKey) Authenticate(secret string, src string) (AuthenticatedResult, error) {
+// 	return NOT_IMPLEMENTED, nil
 // }
 
-func (*mailchimpAccessKey) Verify(secret string, src string) (VerifiedResult, error) {
+func (*mailchimpAccessKey) Authenticate(secret string, src string) (AuthenticatedResult, error) {
 	datacenter_number := strings.Split(secret, "-us")
-	verify_url := fmt.Sprintf("https://us%s.api.mailchimp.com/3.0/", datacenter_number[len(datacenter_number)-1])
+	test_url := fmt.Sprintf("https://us%s.api.mailchimp.com/3.0/", datacenter_number[len(datacenter_number)-1])
 
 	client := &http.Client{}
-	req, _ := http.NewRequest("GET", verify_url, nil)
+	req, _ := http.NewRequest("GET", test_url, nil)
 	req.Header.Set("Authorization", fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte("any_user:"+secret))))
 
 	resp, err := client.Do(req)
@@ -43,8 +43,8 @@ func (*mailchimpAccessKey) Verify(secret string, src string) (VerifiedResult, er
 	defer resp.Body.Close()
 
 	if resp.StatusCode == http.StatusOK {
-		return VERIFIED_TRUE, nil
+		return AUTHENTICATED, nil
 	}
 
-	return VERIFIED_FALSE, nil
+	return UNAUTHENTICATED, nil
 }

@@ -22,7 +22,7 @@ List instances in your Code account:
 select
   secret_type,
   secret,
-  verified,
+  authenticated,
   line,
   col
 from
@@ -39,14 +39,14 @@ order by
 ```
 
 ```
-+-------------------+---------------------------------------------------------------------------+----------------+------+-----+
-| secret_type       | secret                                                                    | verified       | line | col |
-+-------------------+---------------------------------------------------------------------------+----------------+------+-----+
-| aws_access_key_id | AKIA4YFAKFKFYXTDS353                                                      | unverified     | 1    | 120 |
-| basic_auth        | https://joe:passwd123                                                     | unverified     | 1    | 156 |
-| slack_api_token   | xoxp-5228148520-5228148525-1323104836872-10674849628c43b9d4b4660f7f9a7b65 | verified false | 1    | 38  |
-| stripe_api_key    | sk_live_tR3PYbcVNZZ796tH88S4VQ2u                                          | verified false | 1    | 206 |
-+-------------------+---------------------------------------------------------------------------+----------------+------+-----+
++-------------------+---------------------------------------------------------------------------+-----------------+------+-----+
+| secret_type       | secret                                                                    | authenticated   | line | col |
++-------------------+---------------------------------------------------------------------------+-----------------+------+-----+
+| aws_access_key_id | AKIA4YFAKFKFYXTDS353                                                      | not_implemented | 1    | 120 |
+| basic_auth        | https://joe:passwd123                                                     | not_implemented | 1    | 156 |
+| slack_api_token   | xoxp-5228148520-5228148525-1323104836872-10674849628c43b9d4b4660f7f9a7b65 | unauthenticated | 1    | 38  |
+| stripe_api_key    | sk_live_tR3PYbcVNZZ796tH88S4VQ2u                                          | unauthenticated | 1    | 206 |
++-------------------+---------------------------------------------------------------------------+-----------------+------+-----+
 ```
 
 ## Documentation
@@ -77,36 +77,37 @@ connection "code" {
 }
 ```
 
-### Code plugin currently scans for the following secrets:
+## Supported secret types
 
-| Secret                       | Slug                         | Verification |
-| :--------------------------- | :--------------------------- | :----------- |
-| AWS access key ID            | aws_access_key_id            | Available    |
-| Azure storage account key    | azure_storage_account_key    | N/A          |
-| Basic auth                   | basic_auth                   | N/A          |
-| Facebook OAuth               | facebook_oauth               | N/A          |
-| Facebook access token        | facebook_access_token        | N/A          |
-| Facebook secret key          | facebook_secret_key          | N/A          |
-| GitHub OAuth access token    | github_oauth_access_token    | N/A          |
-| GitHub app token             | github_app_token             | N/A          |
-| GitHub personal access token | github_personal_access_token | N/A          |
-| GitHub refresh token         | github_refresh_token         | N/A          |
-| Google API key               | google_api_key               | N/A          |
-| JWT                          | jwt                          | N/A          |
-| Mailchimp access key         | mailchimp_access_key         | Available    |
-| Okta token                   | okta_token                   | N/A          |
-| Slack API token              | slack_api_token              | Available    |
-| Stripe API key               | stripe_api_key               | Available    |
-| Twilio auth token            | twilio_auth_token            | N/A          |
-| Twitter secret key           | twitter_secret_key           | N/A          |
+| Secret                       | Slug                         | Authentication |
+| :--------------------------- | :--------------------------- | :-----------   |
+| AWS Access Key ID            | aws_access_key_id            | Available      |
+| Azure Storage Account Key    | azure_storage_account_key    | N/A            |
+| Basic Auth                   | basic_auth                   | N/A            |
+| Facebook Access Token        | facebook_access_token        | N/A            |
+| Facebook OAuth               | facebook_oauth               | N/A            |
+| Facebook Secret Key          | facebook_secret_key          | N/A            |
+| GitHub App Token             | github_app_token             | N/A            |
+| GitHub OAuth Access Token    | github_oauth_access_token    | N/A            |
+| GitHub Personal Access Token | github_personal_access_token | N/A            |
+| GitHub Refresh Token         | github_refresh_token         | N/A            |
+| Google API Key               | google_api_key               | N/A            |
+| JWT                          | jwt                          | N/A            |
+| Mailchimp Access Key         | mailchimp_access_key         | Available      |
+| Okta Token                   | okta_token                   | N/A            |
+| Slack API Token              | slack_api_token              | Available      |
+| Stripe API Key               | stripe_api_key               | Available      |
+| Twilio Auth Token            | twilio_auth_token            | N/A            |
+| Twitter Secret Key           | twitter_secret_key           | N/A            |
 
-## Verification Status
+### Authentication Status
 
-Verification status of the secret. Valid values are:
+For secret types that support authentication, the results are returned in the `authenticated` column with one of the following values:
 
-- `verified true` secret is still active can we used for leakage.
-- `verified false` means secret is inactive (i.e it may have expired or does not exit anymore, etc... ) and is not working currently.
-- `unverified` means status of the key could not be verified.
+- `authenticated`: Secret is active
+- `unauthenticated`: Secret is inactive and no longer working
+- `not_implemented`: Secret was not tested due to lack of authentication function
+- `unknown`: Secret was tested but results were inconclusive
 
 ## Get involved
 

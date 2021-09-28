@@ -42,7 +42,7 @@ where
 select
   secret_type,
   secret,
-  verified,
+  authenticated,
   line,
   col
 from
