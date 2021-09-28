@@ -20,6 +20,6 @@ func (*githubPersonalAccessToken) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*githubPersonalAccessToken) Verify(secret string) (VerifiedResult, error) {
+func (*githubPersonalAccessToken) Verify(secret string, src string) (VerifiedResult, error) {
 	return UNVERIFIED, nil
 }

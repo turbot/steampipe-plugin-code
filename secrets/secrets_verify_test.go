@@ -2,6 +2,7 @@ package secrets
 
 import (
 	"fmt"
+	"log"
 	"testing"
 )
 
@@ -15,7 +16,7 @@ func TestSlackTokenVerify(t *testing.T) {
 
 	for _, sm := range Matchers() {
 		if sm.Type() == "slack_api_token" {
-			result, err := sm.Verify(slack_api_token)
+			result, err := sm.Verify(slack_api_token, slack_api_token)
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -32,7 +33,7 @@ func TestStripeVerifyOk(t *testing.T) {
 
 	for _, sm := range Matchers() {
 		if sm.Type() == "stripe_api_key" {
-			result, err := sm.Verify(stripeApiKey)
+			result, err := sm.Verify(stripeApiKey, stripeApiKey)
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -49,7 +50,7 @@ func TestStripeVerifyFail(t *testing.T) {
 
 	for _, sm := range Matchers() {
 		if sm.Type() == "stripe_api_key" {
-			result, err := sm.Verify(stripeApiKey)
+			result, err := sm.Verify(stripeApiKey, stripeApiKey)
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -65,11 +66,28 @@ func TestMailChimpVerfifiedFalse(t *testing.T) {
 
 	for _, sm := range Matchers() {
 		if sm.Type() == "mailchimp_access_key" {
-			result, err := sm.Verify(mailchimpAccessKey)
+			result, err := sm.Verify(mailchimpAccessKey, mailchimpAccessKey)
 			if err != nil {
 				t.Fatal(err)
 			}
 			fmt.Printf("TestMailChimp verification result: [%s]", *result)
+		}
+	}
+}
+
+// go test -v -run TestAWSVerfifiedFalse /Users/lalitbhardwaj/Turbot/prod/steampipe-plugin-code/secrets
+func TestAWSVerfifiedFalse(t *testing.T) {
+	fmt.Println()
+	AWSAccessKey := "AKIAABCDABCDABCDRFB"
+	src := "AKIAQGDRKHTKEHWDVRFB   HZjvc32t8fOFrYYD2RyGFUlPXeZHHZne+u0K/Waa"
+
+	for _, sm := range Matchers() {
+		if sm.Type() == "aws_access_key_id" {
+			result, err := sm.Verify(AWSAccessKey, src)
+			if err != nil {
+				t.Fatal(err)
+			}
+			log.Printf("TestAWSVerfifiedTrue verification result: [%s]", *result)
 		}
 	}
 }

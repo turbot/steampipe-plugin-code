@@ -18,7 +18,7 @@ func (*herokuApiKey) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*herokuApiKey) Verify(secret string) (VerifiedResult, error) {
+func (*herokuApiKey) Verify(secret string, src string) (VerifiedResult, error) {
 	return UNVERIFIED, nil
 }
 

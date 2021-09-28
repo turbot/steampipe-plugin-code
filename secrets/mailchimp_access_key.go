@@ -24,11 +24,11 @@ func (*mailchimpAccessKey) DenyList() []*regexp.Regexp {
 	}
 }
 
-// func (*mailchimpAccessKey) Verify(secret string) (VerifiedResult, error) {
+// func (*mailchimpAccessKey) Verify(secret string, src string) (VerifiedResult, error) {
 // 	return UNVERIFIED, nil
 // }
 
-func (*mailchimpAccessKey) Verify(secret string) (VerifiedResult, error) {
+func (*mailchimpAccessKey) Verify(secret string, src string) (VerifiedResult, error) {
 	datacenter_number := strings.Split(secret, "-us")
 	verify_url := fmt.Sprintf("https://us%s.api.mailchimp.com/3.0/", datacenter_number[len(datacenter_number)-1])
 

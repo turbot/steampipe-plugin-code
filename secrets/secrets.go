@@ -12,7 +12,7 @@ type SecretMatcher interface {
 	Type() string
 	DenyList() []*regexp.Regexp
 	// VERIFIED_TRUE if secret works, VERIFIED_FALSE if it does not and UNVERIFIED if there is no test.
-	Verify(string) (VerifiedResult, error)
+	Verify(secret string, src string) (VerifiedResult, error)
 }
 
 func RegisterMatcher(sm SecretMatcher) {

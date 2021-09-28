@@ -18,6 +18,6 @@ func (*githubOAuthAccessToken) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*githubOAuthAccessToken) Verify(secret string) (VerifiedResult, error) {
+func (*githubOAuthAccessToken) Verify(secret string, src string) (VerifiedResult, error) {
 	return UNVERIFIED, nil
 }

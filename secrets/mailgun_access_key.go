@@ -20,7 +20,7 @@ func (*mailgunAccessKey) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*mailgunAccessKey) Verify(secret string) (VerifiedResult, error) {
+func (*mailgunAccessKey) Verify(secret string, src string) (VerifiedResult, error) {
 	return UNVERIFIED, nil
 }
 

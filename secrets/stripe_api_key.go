@@ -24,7 +24,7 @@ func (*stripeApiKey) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*stripeApiKey) Verify(secret string) (VerifiedResult, error) {
+func (*stripeApiKey) Verify(secret string, src string) (VerifiedResult, error) {
 	verify_url := "https://api.stripe.com/v1/charges"
 
 	client := &http.Client{}

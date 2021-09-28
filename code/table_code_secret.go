@@ -86,7 +86,9 @@ func listSecret(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 
 func getVerified(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (interface{}, error) {
 	sm := h.Item.(secretMatch)
-	verified, err := sm.Matcher.Verify(sm.Secret)
+	quals := d.KeyColumnQuals
+	src := quals["src"].GetStringValue()
+	verified, err := sm.Matcher.Verify(sm.Secret, src)
 	if err != nil {
 		return nil, err
 	}

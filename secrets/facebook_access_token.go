@@ -20,6 +20,6 @@ func (*facebookAccessToken) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*facebookAccessToken) Verify(secret string) (VerifiedResult, error) {
+func (*facebookAccessToken) Verify(secret string, src string) (VerifiedResult, error) {
 	return UNVERIFIED, nil
 }

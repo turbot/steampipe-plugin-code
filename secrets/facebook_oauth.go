@@ -19,6 +19,6 @@ func (*facebookOauth) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*facebookOauth) Verify(secret string) (VerifiedResult, error) {
+func (*facebookOauth) Verify(secret string, src string) (VerifiedResult, error) {
 	return UNVERIFIED, nil
 }
