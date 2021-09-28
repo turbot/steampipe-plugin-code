@@ -14,7 +14,7 @@ import (
 func tableCodeSecret(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "code_secret",
-		Description: "TODO",
+		Description: "Detect, and verify if possible, secrets in a given source string.",
 		List: &plugin.ListConfig{
 			KeyColumns: plugin.SingleColumn("src"),
 			Hydrate:    listSecret,
