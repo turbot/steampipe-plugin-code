@@ -59,38 +59,3 @@ where
     '* Stripe Api Key: sk_live_tR3PYbcVNZZ796tH88S4VQ2u'
     '* Azure Storage Account Key: mllhBNrG467B7Q5iT+ePFr6eLCE24ij9vT/fCeckOunfqzoGm8k5X9vKCphDaO81gmuzr89ldN+gKB0vlEHahg=='
 ```
-
-### Detect secrets in instance user_data
-
-```sql
-select
-  instance_id,
-  region as instance_region,
-  secret_type,
-  secret,
-  line,
-  col
-from
-  code_secret,
-  aws_ec2_instance
-where
-  src = user_data;
-```
-
-### Detect secrets in cloudformation stack template
-
-```sql
-select
-  id as stack_id,
-  name as stack_name,
-  region as stack_region,
-  secret_type,
-  secret,
-  line,
-  col
-from
-  code_secret,
-  aws_cloudformation_stack
-where
-  src = template_body;
-```
