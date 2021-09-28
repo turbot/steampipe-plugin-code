@@ -18,8 +18,6 @@ func (*oktaToken) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*oktaToken) Verify(secret string) (VerifiedResult, error) {
-	return UNVERIFIED, nil
+func (*oktaToken) Authenticate(secret string, src string) (AuthenticatedResult, error) {
+	return NOT_IMPLEMENTED, nil
 }
-
-// select * from code_secret where src = '00Am7B2M_U-63q_Ppd6tDzAbBOkvcCht-kDG-baM7t';

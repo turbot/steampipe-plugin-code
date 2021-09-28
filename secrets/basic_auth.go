@@ -40,7 +40,7 @@ func (*basicAuth) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*basicAuth) Verify(secret string) (VerifiedResult, error) {
+func (*basicAuth) Authenticate(secret string, src string) (AuthenticatedResult, error) {
 	// Not supported
-	return UNVERIFIED, nil
+	return NOT_IMPLEMENTED, nil
 }

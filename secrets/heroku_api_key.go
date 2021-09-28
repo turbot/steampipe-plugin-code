@@ -18,8 +18,8 @@ func (*herokuApiKey) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*herokuApiKey) Verify(secret string) (VerifiedResult, error) {
-	return UNVERIFIED, nil
+func (*herokuApiKey) Authenticate(secret string, src string) (AuthenticatedResult, error) {
+	return NOT_IMPLEMENTED, nil
 }
 
 // select * from code_secret where src = 'def66a66-3411-44a3-ad5f-a6af6f316f92';

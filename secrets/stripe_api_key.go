@@ -24,11 +24,11 @@ func (*stripeApiKey) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*stripeApiKey) Verify(secret string) (VerifiedResult, error) {
-	verify_url := "https://api.stripe.com/v1/charges"
+func (*stripeApiKey) Authenticate(secret string, src string) (AuthenticatedResult, error) {
+	test_url := "https://api.stripe.com/v1/charges"
 
 	client := &http.Client{}
-	req, _ := http.NewRequest("GET", verify_url, nil)
+	req, _ := http.NewRequest("GET", test_url, nil)
 	req.Header.Set("Authorization", fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(secret))))
 
 	resp, err := client.Do(req)
@@ -37,13 +37,13 @@ func (*stripeApiKey) Verify(secret string) (VerifiedResult, error) {
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode == http.StatusOK {
-		return VERIFIED_TRUE, nil
+		return AUTHENTICATED, nil
 	}
 
 	// Restricted keys may be limited to certain endpoints
 	if strings.HasPrefix(secret, "rk_live") {
-		return UNVERIFIED, nil
+		return NOT_IMPLEMENTED, nil
 	}
 
-	return VERIFIED_FALSE, nil
+	return UNAUTHENTICATED, nil
 }

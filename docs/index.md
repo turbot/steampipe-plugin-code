@@ -2,7 +2,7 @@
 organization: Turbot
 category: ["software development"]
 icon_url: "/images/plugins/turbot/code.svg"
-brand_color: "#000000"
+brand_color: "#00b050"
 display_name: "Code"
 short_name: "code"
 description: "Steampipe plugin to query secrets and more from Code."
@@ -22,14 +22,14 @@ List instances in your Code account:
 select
   secret_type,
   secret,
-  verified,
+  authenticated,
   line,
   col
 from
   code_secret
 where
   src =
-    'Mixed secrets are matched:\n'
+    E'Mixed secrets are matched:\n'
     '* Slack: xoxp-5228148520-5228148525-1323104836872-10674849628c43b9d4b4660f7f9a7b65\n'
     '* AWS: AKIA4YFAKFKFYXTDS353\n'
     '* Basic auth: https://joe:passwd123@example.com/secret'
@@ -39,14 +39,14 @@ order by
 ```
 
 ```
-+-------------------+---------------------------------------------------------------------------+----------------+------+-----+
-| secret_type       | secret                                                                    | verified       | line | col |
-+-------------------+---------------------------------------------------------------------------+----------------+------+-----+
-| aws_access_key_id | AKIA4YFAKFKFYXTDS353                                                      | unverified     | 1    | 120 |
-| basic_auth        | https://joe:passwd123                                                     | unverified     | 1    | 156 |
-| slack_api_token   | xoxp-5228148520-5228148525-1323104836872-10674849628c43b9d4b4660f7f9a7b65 | verified false | 1    | 38  |
-| stripe_api_key    | sk_live_tR3PYbcVNZZ796tH88S4VQ2u                                          | verified false | 1    | 206 |
-+-------------------+---------------------------------------------------------------------------+----------------+------+-----+
++-------------------+---------------------------------------------------------------------------+-----------------+------+-----+
+| secret_type       | secret                                                                    | authenticated   | line | col |
++-------------------+---------------------------------------------------------------------------+-----------------+------+-----+
+| aws_access_key_id | AKIA4YFAKFKFYXTDS353                                                      | not_implemented | 3    | 8   |
+| basic_auth        | https://joe:passwd123                                                     | not_implemented | 4    | 15  |
+| slack_api_token   | xoxp-5228148520-5228148525-1323104836872-10674849628c43b9d4b4660f7f9a7b65 | unauthenticated | 2    | 10  |
+| stripe_api_key    | sk_live_tR3PYbcVNZZ796tH88S4VQ2u                                          | unauthenticated | 5    | 11  |
++-------------------+---------------------------------------------------------------------------+-----------------+------+-----+
 ```
 
 ## Documentation
@@ -77,28 +77,37 @@ connection "code" {
 }
 ```
 
-### Code plugin currently scans for the following secrets:
+## Supported secret types
 
-| Secrets                      | Secret slug                  |
-| :--------------------------- | :--------------------------- |
-| AWS access key id            | aws_access_key_id            |
-| Azure storage account key    | azure_storage_account_key    |
-| Basic auth                   | basic_auth                   |
-| Facebook access token        | facebook_access_token        |
-| Facebook oauth               | facebook_oauth               |
-| Facebook secret key          | facebook_secret_key          |
-| Github app token             | github_app_token             |
-| Github oauth access token    | github_oauth_access_token    |
-| Github personal access token | github_personal_access_token |
-| Github refresh token         | github_refresh_token         |
-| Google api key               | google_api_key               |
-| JWT                          | jwt                          |
-| Mailchimp access key         | mailchimp_access_key         |
-| Okta token                   | okta_token                   |
-| Slack api token              | slack_api_token              |
-| Stripe api key               | stripe_api_key               |
-| Twilio auth token            | twilio_auth_token            |
-| Twitter secret key           | twitter_secret_key           |
+| Secret                       | Slug                         | Authentication |
+| :--------------------------- | :--------------------------- | :-----------   |
+| AWS Access Key ID            | aws_access_key_id            | Available      |
+| Azure Storage Account Key    | azure_storage_account_key    | N/A            |
+| Basic Auth                   | basic_auth                   | N/A            |
+| Facebook Access Token        | facebook_access_token        | N/A            |
+| Facebook OAuth               | facebook_oauth               | N/A            |
+| Facebook Secret Key          | facebook_secret_key          | N/A            |
+| GitHub App Token             | github_app_token             | N/A            |
+| GitHub OAuth Access Token    | github_oauth_access_token    | N/A            |
+| GitHub Personal Access Token | github_personal_access_token | N/A            |
+| GitHub Refresh Token         | github_refresh_token         | N/A            |
+| Google API Key               | google_api_key               | N/A            |
+| JWT                          | jwt                          | N/A            |
+| Mailchimp Access Key         | mailchimp_access_key         | Available      |
+| Okta Token                   | okta_token                   | N/A            |
+| Slack API Token              | slack_api_token              | Available      |
+| Stripe API Key               | stripe_api_key               | Available      |
+| Twilio Auth Token            | twilio_auth_token            | N/A            |
+| Twitter Secret Key           | twitter_secret_key           | N/A            |
+
+### Authentication Status
+
+For secret types that support authentication, the results are returned in the `authenticated` column with one of the following values:
+
+- `authenticated`: Secret is active
+- `unauthenticated`: Secret is inactive
+- `not_implemented`: Secret was not tested due to lack of authentication function
+- `unknown`: Secret was tested but results were inconclusive
 
 ## Get involved
 

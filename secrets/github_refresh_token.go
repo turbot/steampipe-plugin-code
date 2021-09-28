@@ -20,6 +20,6 @@ func (*githubRefreshToken) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*githubRefreshToken) Verify(secret string) (VerifiedResult, error) {
-	return UNVERIFIED, nil
+func (*githubRefreshToken) Authenticate(secret string, src string) (AuthenticatedResult, error) {
+	return NOT_IMPLEMENTED, nil
 }

@@ -20,6 +20,6 @@ func (*jwt) DenyList() []*regexp.Regexp {
 	}
 }
 
-func (*jwt) Verify(secret string) (VerifiedResult, error) {
-	return UNVERIFIED, nil
+func (*jwt) Authenticate(secret string, src string) (AuthenticatedResult, error) {
+	return NOT_IMPLEMENTED, nil
 }
