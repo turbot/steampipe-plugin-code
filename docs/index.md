@@ -29,7 +29,7 @@ from
   code_secret
 where
   src =
-    'Mixed secrets are matched:\n'
+    E'Mixed secrets are matched:\n'
     '* Slack: xoxp-5228148520-5228148525-1323104836872-10674849628c43b9d4b4660f7f9a7b65\n'
     '* AWS: AKIA4YFAKFKFYXTDS353\n'
     '* Basic auth: https://joe:passwd123@example.com/secret'
@@ -42,10 +42,10 @@ order by
 +-------------------+---------------------------------------------------------------------------+-----------------+------+-----+
 | secret_type       | secret                                                                    | authenticated   | line | col |
 +-------------------+---------------------------------------------------------------------------+-----------------+------+-----+
-| aws_access_key_id | AKIA4YFAKFKFYXTDS353                                                      | not_implemented | 1    | 120 |
-| basic_auth        | https://joe:passwd123                                                     | not_implemented | 1    | 156 |
-| slack_api_token   | xoxp-5228148520-5228148525-1323104836872-10674849628c43b9d4b4660f7f9a7b65 | unauthenticated | 1    | 38  |
-| stripe_api_key    | sk_live_tR3PYbcVNZZ796tH88S4VQ2u                                          | unauthenticated | 1    | 206 |
+| aws_access_key_id | AKIA4YFAKFKFYXTDS353                                                      | not_implemented | 3    | 8   |
+| basic_auth        | https://joe:passwd123                                                     | not_implemented | 4    | 15  |
+| slack_api_token   | xoxp-5228148520-5228148525-1323104836872-10674849628c43b9d4b4660f7f9a7b65 | unauthenticated | 2    | 10  |
+| stripe_api_key    | sk_live_tR3PYbcVNZZ796tH88S4VQ2u                                          | unauthenticated | 5    | 11  |
 +-------------------+---------------------------------------------------------------------------+-----------------+------+-----+
 ```
 
@@ -105,7 +105,7 @@ connection "code" {
 For secret types that support authentication, the results are returned in the `authenticated` column with one of the following values:
 
 - `authenticated`: Secret is active
-- `unauthenticated`: Secret is inactive and no longer working
+- `unauthenticated`: Secret is inactive
 - `not_implemented`: Secret was not tested due to lack of authentication function
 - `unknown`: Secret was tested but results were inconclusive
 
