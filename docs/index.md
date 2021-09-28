@@ -2,7 +2,7 @@
 organization: Turbot
 category: ["software development"]
 icon_url: "/images/plugins/turbot/code.svg"
-brand_color: "#000000"
+brand_color: "#00b050"
 display_name: "Code"
 short_name: "code"
 description: "Steampipe plugin to query secrets and more from Code."
