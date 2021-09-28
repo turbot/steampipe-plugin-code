@@ -100,6 +100,14 @@ connection "code" {
 | Twilio auth token            | twilio_auth_token            |
 | Twitter secret key           | twitter_secret_key           |
 
+## Verification Status
+
+Verification status of the secret. Valid values are:
+
+- `verified true` secret is still active can we used for leakage.
+- `verified false` means secret is inactive (i.e it may have expired or does not exit anymore, etc... ) and is not working currently.
+- `unverified` means status of the key could not be verfiied.
+
 ## Get involved
 
 - Open source: https://github.com/turbot/steampipe-plugin-code
