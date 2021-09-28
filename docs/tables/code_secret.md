@@ -60,7 +60,7 @@ where
     '* Azure Storage Account Key: mllhBNrG467B7Q5iT+ePFr6eLCE24ij9vT/fCeckOunfqzoGm8k5X9vKCphDaO81gmuzr89ldN+gKB0vlEHahg=='
 ```
 
-### Detect secrets in instance user_data
+### Detect secrets in AWS EC2 instance user data (requires AWS plugin)
 
 ```sql
 select
@@ -68,6 +68,7 @@ select
   region as instance_region,
   secret_type,
   secret,
+  authenticated,
   line,
   col
 from
@@ -77,7 +78,7 @@ where
   src = user_data;
 ```
 
-### Detect secrets in cloudformation stack template
+### Detect secrets in AWS CloudFormation stack template body (requires AWS plugin)
 
 ```sql
 select
@@ -86,6 +87,7 @@ select
   region as stack_region,
   secret_type,
   secret,
+  authenticated,
   line,
   col
 from
