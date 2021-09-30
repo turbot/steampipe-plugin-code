@@ -109,6 +109,12 @@ For secret types that support authentication, the results are returned in the `a
 - `not_implemented`: Secret was not tested due to lack of authentication function
 - `unknown`: Secret was tested but results were inconclusive
 
+## Credits
+
+- The `code_secret` table is based on [Yelp's detect secrets](https://github.com/Yelp/detect-secrets)
+  project. The general matching approach and regular expressions are copied and
+  based on their amazing work.
+
 ## Get involved
 
 - Open source: https://github.com/turbot/steampipe-plugin-code
