@@ -32,7 +32,7 @@ from
   code_secret
 where
   src =
-    'AWS access keys should be detected:\n'
+    E'AWS access keys should be detected:\n'
     '* AKIA4YFAKEKEYXTDS252\n* AKIA9YFBKFGZYZTW387K'
 ```
 
@@ -49,7 +49,7 @@ from
   code_secret
 where
   src =
-    'Mixed secrets are matched:\n'
+    E'Mixed secrets are matched:\n'
     '* Slack: xoxp-5228148520-5228148525-1323104836872-10674849628c43b9d4b4660f7f9a7b65\n'
     '* AWS: AKIA4YFAKFKFYXTDS353\n'
     '* Replace and try <AWS_ACCESS_KEY>:<AWS_SECRET_KEY> \n'
