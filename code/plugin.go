@@ -13,6 +13,7 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 		DefaultTransform: transform.FromGo().NullIfZero(),
 		TableMap: map[string]*plugin.Table{
 			"code_secret": tableCodeSecret(ctx),
+			"parse_ini":   tableParseIni(ctx),
 		},
 	}
 	return p
