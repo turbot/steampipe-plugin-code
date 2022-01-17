@@ -26,8 +26,7 @@ func tableParseIni(ctx context.Context) *plugin.Table {
 			{Name: "section", Type: proto.ColumnType_STRING, Description: "Specifies the name of the section."},
 			{Name: "key", Type: proto.ColumnType_STRING, Description: "The name of the key."},
 			{Name: "value", Type: proto.ColumnType_STRING, Description: "The value of corresponding key."},
-			{Name: "comment", Type: proto.ColumnType_STRING, Description: ""},
-			{Name: "nested_values", Type: proto.ColumnType_JSON, Description: ""},
+			{Name: "comment", Type: proto.ColumnType_STRING, Description: "The short notes used to describe the key."},
 		},
 	}
 }
@@ -45,9 +44,9 @@ func parseIniFIle(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDat
 	givenPath := d.KeyColumnQuals["path"].GetStringValue()
 
 	var opts ini.LoadOptions
-	opts.AllowNestedValues = true
 	opts.AllowPythonMultilineValues = true
 
+	// Load file
 	cfg, err := ini.LoadSources(opts, givenPath)
 	if err != nil {
 		panic(fmt.Errorf("fail to read file: %v", err))
@@ -56,17 +55,30 @@ func parseIniFIle(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDat
 	for _, i := range cfg.Sections() {
 		// Extract keys of a section
 		for _, key := range cfg.Section(i.Name()).Keys() {
-			d.StreamListItem(ctx, parseFormat{
-				Path:         givenPath,
-				Section:      i.Name(),
-				Key:          key.Name(),
-				Value:        parseValue(cfg, key.String()),
-				Comment:      key.Comment,
-				NestedValues: key.NestedValues(),
-			})
+			// Check for nested config
+			isNested, _ := regexp.Compile(`^\n`)
+			if isNested.MatchString(key.String()) {
+				nestedValues := parseNestedValues(key.Name(), key.String())
+				for k, v := range nestedValues {
+					newKey := fmt.Sprintf("%s.%s", key.Name(), k)
+					d.StreamListItem(ctx, formatResult(cfg, givenPath, i.Name(), newKey, v, ""))
+				}
+			} else {
+				d.StreamListItem(ctx, formatResult(cfg, givenPath, i.Name(), key.Name(), key.String(), key.Comment))
+			}
 		}
 	}
 	return nil, nil
+}
+
+func formatResult(cfg *ini.File, filePath string, secton string, key string, val string, comment string) parseFormat {
+	return parseFormat{
+		Path:    filePath,
+		Section: secton,
+		Key:     key,
+		Value:   parseValue(cfg, val),
+		Comment: comment,
+	}
 }
 
 // parseValue will parse env variable and other variable references with its actual value
@@ -91,4 +103,18 @@ func parseValue(cfg *ini.File, str string) string {
 		}
 	}
 	return str
+}
+
+func parseNestedValues(key string, val string) map[string]string {
+	val = strings.Replace(val, "\n", "", 1)
+	val = strings.ReplaceAll(val, " ", "")
+	val = strings.ReplaceAll(val, "\n", ",")
+
+	nestedValues := strings.Split(val, ",")
+	result := map[string]string{}
+	for _, i := range nestedValues {
+		splitStr := strings.Split(i, "=")
+		result[splitStr[0]] = splitStr[1]
+	}
+	return result
 }
