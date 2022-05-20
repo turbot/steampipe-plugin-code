@@ -6,7 +6,7 @@ Use SQL to query secrets and more from source code.
 
 - **[Get started →](https://hub.steampipe.io/plugins/turbot/code)**
 - Documentation: [Table definitions & examples](https://hub.steampipe.io/plugins/turbot/code/tables)
-- Community: [Slack Channel](https://join.slack.com/t/steampipe/shared_invite/zt-oij778tv-lYyRTWOTMQYBVAbtPSWs3g)
+- Community: [Slack Channel](https://steampipe.io/community/join)
 - Get involved: [Issues](https://github.com/turbot/steampipe-plugin-code/issues)
 
 ## Quick start
@@ -30,9 +30,12 @@ from
   code_secret
 where
   src =
-    'Mixed secrets are matched:\n'
-    '* Slack: xoxp-5228148520-5228148525-1323104836872-10674849628c43b9d4b4660f7f9a7b65\n'
-    '* AWS: AKIA4YFAKFKFYXTDS353\n'
+    'Mixed secrets are matched:
+'
+    '* Slack: xoxp-5228148520-5228148525-1323104836872-10674849628c43b9d4b4660f7f9a7b65
+'
+    '* AWS: AKIA4YFAKFKFYXTDS353
+'
     '* Basic auth: https://joe:passwd123@example.com/secret'
     '* Stripe: sk_live_tR3PYbcVNZZ796tH88S4VQ2u';
 ```
