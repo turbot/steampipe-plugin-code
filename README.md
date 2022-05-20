@@ -30,12 +30,9 @@ from
   code_secret
 where
   src =
-    'Mixed secrets are matched:
-'
-    '* Slack: xoxp-5228148520-5228148525-1323104836872-10674849628c43b9d4b4660f7f9a7b65
-'
-    '* AWS: AKIA4YFAKFKFYXTDS353
-'
+    'Mixed secrets are matched:'
+    '* Slack: xoxp-5228148520-5228148525-1323104836872-10674849628c43b9d4b4660f7f9a7b65'
+    '* AWS: AKIA4YFAKFKFYXTDS353'
     '* Basic auth: https://joe:passwd123@example.com/secret'
     '* Stripe: sk_live_tR3PYbcVNZZ796tH88S4VQ2u';
 ```
