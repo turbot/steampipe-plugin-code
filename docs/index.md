@@ -14,9 +14,9 @@ og_image: "/images/plugins/turbot/code-social-graphic.png"
 
 Source code can be any string or data for querying.
 
-[Steampipe](https://steampipe.io) is an open source CLI to instantly query cloud APIs using SQL.
+[Steampipe](https://steampipe.io) is an open source CLI to instantly query local data or APIs (cloud or not) using SQL.
 
-List instances in your Code account:
+List secrets in your source code:
 
 ```sql
 select
