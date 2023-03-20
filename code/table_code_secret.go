@@ -6,9 +6,9 @@ import (
 
 	"github.com/turbot/steampipe-plugin-code/secrets"
 
-	"github.com/turbot/steampipe-plugin-sdk/v4/grpc/proto"
-	"github.com/turbot/steampipe-plugin-sdk/v4/plugin"
-	"github.com/turbot/steampipe-plugin-sdk/v4/plugin/transform"
+	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
+	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
 )
 
 func tableCodeSecret(ctx context.Context) *plugin.Table {
@@ -46,7 +46,7 @@ type secretMatch struct {
 }
 
 func listSecret(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
-	quals := d.KeyColumnQuals
+	quals := d.EqualsQuals
 	src := quals["src"].GetStringValue()
 
 	for _, sm := range secrets.Matchers() {
@@ -86,7 +86,7 @@ func listSecret(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 
 func getAuthenticated(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (interface{}, error) {
 	sm := h.Item.(secretMatch)
-	quals := d.KeyColumnQuals
+	quals := d.EqualsQuals
 	src := quals["src"].GetStringValue()
 	authenticated, err := sm.Matcher.Authenticate(sm.Secret, src)
 	if err != nil {
