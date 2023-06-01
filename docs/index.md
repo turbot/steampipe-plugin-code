@@ -16,7 +16,7 @@ Source code can be any string or data for querying.
 
 [Steampipe](https://steampipe.io) is an open source CLI to instantly query cloud APIs using SQL.
 
-List instances in your Code account:
+List secrets from text:
 
 ```sql
 select
