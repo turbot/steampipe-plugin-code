@@ -118,4 +118,4 @@ For secret types that support authentication, the results are returned in the `a
 ## Get involved
 
 - Open source: https://github.com/turbot/steampipe-plugin-code
-- Community: [Slack Channel](https://steampipe.io/community/join)
+- Community: [Join #steampipe on Slack →](https://turbot.com/community/join)
