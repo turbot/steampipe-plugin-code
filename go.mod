@@ -3,7 +3,7 @@ module github.com/turbot/steampipe-plugin-code
 go 1.19
 
 require (
-	github.com/aws/aws-sdk-go v1.44.122
+	github.com/aws/aws-sdk-go v1.45.14
 	github.com/turbot/go-kit v0.6.0
 	github.com/turbot/steampipe-plugin-sdk/v5 v5.5.1
 )
