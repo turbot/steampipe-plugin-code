@@ -1,3 +1,9 @@
+## v0.5.1 [2023-10-05]
+
+_Dependencies_
+
+- Recompiled plugin with [steampipe-plugin-sdk v5.6.2](https://github.com/turbot/steampipe-plugin-sdk/blob/main/CHANGELOG.md#v562-2023-10-03) which prevents nil pointer reference errors for implicit hydrate configs. ([#43](https://github.com/turbot/steampipe-plugin-code/pull/43))
+
 ## v0.5.0 [2023-10-02]
 
 _Dependencies_
