@@ -5,11 +5,14 @@ description: "Allows users to query Code Secrets, specifically the secret's name
 
 # Table: code_secret - Query Code Secrets using SQL
 
-A Code Secret is a resource within Oracle Cloud Infrastructure (OCI) that allows you to manage and store secrets such as database credentials, API keys, and other sensitive information. It provides a centralized way to manage secrets for various OCI resources, including databases, applications, and more. Code Secrets help you keep your sensitive information secure and take appropriate actions when predefined conditions are met.
+A Code Secret is a resource that allows you to manage and store secrets such as database credentials, API keys, and other sensitive information. It provides a centralized way to manage secrets for various resources, including databases, applications, and more. Code Secrets help you keep your sensitive information secure and take appropriate actions when predefined conditions are met.
 
 ## Table Usage Guide
 
-The `code_secret` table provides insights into secrets within Oracle Cloud Infrastructure (OCI) Code Secrets. As a DevOps engineer, explore secret-specific details through this table, including secret names, descriptions, and associated metadata. Utilize it to uncover information about secrets, such as their creation and update timestamps, and the content of the secrets.
+The `code_secret` table provides insights into Code Secrets. As a DevOps engineer, explore secret-specific details through this table, including secret names, descriptions, and associated metadata. Utilize it to uncover information about secrets, such as their creation and update timestamps, and the content of the secrets.
+
+**Important Notes**
+- You must specify the `src` in the `where` clause to query this table.
 
 ## Examples
 
