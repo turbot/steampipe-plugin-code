@@ -8,6 +8,7 @@ short_name: "code"
 description: "Steampipe plugin to query secrets and more from Code."
 og_description: "Query source code with SQL! Open source CLI. No DB required."
 og_image: "/images/plugins/turbot/code-social-graphic.png"
+engines: ["steampipe", "sqlite", "postgres", "export"]
 ---
 
 # Code + Steampipe
