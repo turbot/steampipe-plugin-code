@@ -116,7 +116,4 @@ For secret types that support authentication, the results are returned in the `a
   project. The general matching approach and regular expressions are copied and
   based on their amazing work.
 
-## Get involved
 
-- Open source: https://github.com/turbot/steampipe-plugin-code
-- Community: [Join #steampipe on Slack →](https://turbot.com/community/join)
