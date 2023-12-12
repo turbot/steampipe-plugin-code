@@ -15,7 +15,7 @@ engines: ["steampipe", "sqlite", "postgres", "export"]
 
 Source code can be any string or data for querying.
 
-[Steampipe](https://steampipe.io) is an open source CLI to instantly query cloud APIs using SQL.
+[Steampipe](https://steampipe.io) is an open-source zero-ETL engine to instantly query cloud APIs using SQL.
 
 List secrets from text:
 
