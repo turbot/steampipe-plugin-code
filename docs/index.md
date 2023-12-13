@@ -8,13 +8,14 @@ short_name: "code"
 description: "Steampipe plugin to query secrets and more from Code."
 og_description: "Query source code with SQL! Open source CLI. No DB required."
 og_image: "/images/plugins/turbot/code-social-graphic.png"
+engines: ["steampipe", "sqlite", "postgres", "export"]
 ---
 
 # Code + Steampipe
 
 Source code can be any string or data for querying.
 
-[Steampipe](https://steampipe.io) is an open source CLI to instantly query cloud APIs using SQL.
+[Steampipe](https://steampipe.io) is an open-source zero-ETL engine to instantly query cloud APIs using SQL.
 
 List secrets from text:
 
@@ -115,7 +116,4 @@ For secret types that support authentication, the results are returned in the `a
   project. The general matching approach and regular expressions are copied and
   based on their amazing work.
 
-## Get involved
 
-- Open source: https://github.com/turbot/steampipe-plugin-code
-- Community: [Join #steampipe on Slack →](https://turbot.com/community/join)
