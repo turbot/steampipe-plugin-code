@@ -28,7 +28,8 @@ func (*awsAccessKeyID) Type() string {
 
 func (*awsAccessKeyID) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
-		regexp.MustCompile("(?m)AKIA[0-9A-Z]{16}"),
+		// Key types are from this list https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-unique-ids
+		regexp.MustCompile("(?m)((AKIA|ABIA|ACCA|AGPA|AIDA|AIPA|ANPA|ANVA|APKA|AROA|ASCA|ASIA)[0-9A-Z]{16})"),
 	}
 }
 
