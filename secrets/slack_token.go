@@ -20,7 +20,7 @@ func (*slackApiToken) Type() string {
 
 func (*slackApiToken) DenyList() []*regexp.Regexp {
 	return []*regexp.Regexp{
-		regexp.MustCompile(`(?m)xox(?:a|b|p|o|s|r)-(?:\d+-)+[a-z0-9]+`),
+		regexp.MustCompile(`(?m)xox(?:a|b|p|o|s|r)-(?:\d+-)+[a-z0-9A-X]+`),
 	}
 }
 
