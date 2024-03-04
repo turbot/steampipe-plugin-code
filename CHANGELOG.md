@@ -1,3 +1,10 @@
+## v0.7.0 [2024-03-04]
+
+_Enhancements_
+
+- Updated the regex pattern of `slack_api_token` to also detect the Slack bot tokens. ([#73](https://github.com/turbot/steampipe-plugin-code/pull/73))
+- Updated the regex pattern of AWS `access_key_id` to include key resources like AWS SSO credentials. ([#74](https://github.com/turbot/steampipe-plugin-code/pull/74))
+
 ## v0.6.0 [2023-12-12]
 
 _What's new?_
