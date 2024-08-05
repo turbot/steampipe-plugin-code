@@ -7,7 +7,7 @@ toolchain go1.21.1
 require (
 	github.com/aws/aws-sdk-go v1.44.122
 	github.com/turbot/go-kit v0.10.0-rc.0
-	github.com/turbot/steampipe-plugin-sdk/v5 v5.10.1
+	github.com/turbot/steampipe-plugin-sdk/v5 v5.10.2
 )
 
 require (
