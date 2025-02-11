@@ -2,9 +2,8 @@ package code
 
 import (
 	"context"
+	"github.com/turbot/pipe-fittings/v2/secrets"
 	"strings"
-
-	"github.com/turbot/steampipe-plugin-code/secrets"
 
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
