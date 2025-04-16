@@ -2,13 +2,13 @@ package secrets
 
 import (
 	"regexp"
+	"slices"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/sts"
-	"github.com/turbot/go-kit/helpers"
 )
 
 func init() {
@@ -86,7 +86,7 @@ func (*awsAccessKeyID) Authenticate(secret string, src string) (AuthenticatedRes
 				// SignatureDoesNotMatch - In case Access key is invalid but secret key is not is correct
 				// IncompleteSignature - When the access key is invalid
 				// InvalidClientTokenId - When access key and secret key are valid but expired
-				if helpers.StringSliceContains([]string{"SignatureDoesNotMatch", "IncompleteSignature", "InvalidClientTokenId"}, awsErr.Code()) {
+				if slices.Contains([]string{"SignatureDoesNotMatch", "IncompleteSignature", "InvalidClientTokenId"}, awsErr.Code()) {
 					return UNAUTHENTICATED, nil
 				}
 			}
