@@ -35,7 +35,7 @@ func (*stripeApiKey) Authenticate(secret string, src string) (AuthenticatedResul
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 	if resp.StatusCode == http.StatusOK {
 		return AUTHENTICATED, nil
 	}
